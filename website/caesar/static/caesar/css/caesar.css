@@ -1,0 +1,15 @@
+.input{
+  width:200px;
+  height:80px;
+  border-radius:20px;
+  position:absolute;
+  left:100px;
+  top:100px;
+}
+
+.classification{
+  width:200px;
+  height:80px;
+  border-radius:20px;
+  position:absolute;
+}
