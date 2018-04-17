@@ -14,6 +14,31 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <link href="../../static/caesar/css/navbar-top-fixed.css" rel="stylesheet">
     <link href="../../static/caesar/css/caesar.css" rel="stylesheet">
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#button_one").click(function(){
+          $(this).attr("disabled","true");
+          $("#arrow1").hide();
+          $("#background1").show();
+          $("#arrow2").hide();
+          $("#background2").show();
+          $("#arrow3").hide();
+          $("#background3").show();
+          $("#arrow4").hide();
+          $("#background4").show();
+          $("#arrow1").fadeIn("slow");
+          $("#background1").hide();
+          $("#arrow2").fadeIn("slow");
+          $("#background2").hide();
+          $("#arrow3").fadeIn("slow");
+          $("#background3").hide();
+          $("#arrow4").fadeIn("slow");
+          $("#background4").hide();
+          setTimeout("$('#button_one').removeAttr('disabled')",800);
+        });
+      });
+    </script>
   </head>
 
   <body>
@@ -45,23 +70,27 @@
       <div class="jumbotron">
         <div class="row">
           <img src="../../static/caesar/images/input.png" alt="input" width="200" height="80">
-          <img src="../../static/caesar/images/rightarrow.png" alt="arrow" width="200" height="80">
+          <img src="../../static/caesar/images/background.png" id="background1" alt="" width="200" height="80">
+          <img id="arrow1" src="../../static/caesar/images/rightarrow.png" alt="arrow" width="200" height="80" style="display:none;">
           <img src="../../static/caesar/images/percheck.png" alt="input" width="200" height="80">
         </div>
         <div class="row">
           <img src="../../static/caesar/images/background.png" alt="" width="460" height="100">
-          <img src="../../static/caesar/images/downarrow.png" alt="arrow" width="80" height="100">
+          <img src="../../static/caesar/images/background.png" id="background2" alt="" width="80" height="100">
+          <img id="arrow2" src="../../static/caesar/images/downarrow.png" alt="arrow" width="80" height="100" style="display:none;">
         </div>
         <div class="row">
           <img src="../../static/caesar/images/background.png" alt="" width="425" height="150">
           <img src="../../static/caesar/images/brain.png" alt="brain" width="150" height="150">
-          <img src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80">
+          <img src="../../static/caesar/images/background.png" id="background3" alt="" width="200" height="80">
+          <img id="arrow3" src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80" style="display:none;">
           <!-- <img src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80"> -->
           <img src="../../static/caesar/images/Ae.png" alt="ae" width="200" height="80">
         </div>
         <div class="row">
           <img src="../../static/caesar/images/background.png" alt="" width="460" height="100">
-          <img src="../../static/caesar/images/updownarrow.png" alt="arrow" width="80" height="100">
+          <img src="../../static/caesar/images/background.png" id="background4" alt="" width="80" height="100">
+          <img id="arrow4" src="../../static/caesar/images/updownarrow.png" alt="arrow" width="80" height="100" style="display:none;">
         </div>
         <div class="row">
           <img src="../../static/caesar/images/background.png" alt="" width="400" height="80">
@@ -84,7 +113,7 @@
           </div>
 
           <div style="text-align:right;">
-            <button type="button" class="btn btn-primary btn-lg" >one by one</button>
+            <button id="button_one" type="button" class="btn btn-primary btn-lg" >one by one</button>
             <span>&nbsp&nbsp&nbsp</span>
             <button type="button" class="btn btn-primary btn-lg" >streaming </button>
           </div>
