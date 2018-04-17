@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 
 from django.db import models
 
-# Create your models here.
+class BrainModule(models.Model):
+    trade_id = models.PositiveIntegerField(default=0)
+    predict = models.NullBooleanField()
+    result = models.NullBooleanField()
