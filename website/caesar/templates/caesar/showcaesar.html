@@ -16,8 +16,28 @@
     <link href="../../static/caesar/css/caesar.css" rel="stylesheet">
     <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
+      // window.buttonadd = 0;
+      var i = 0;
+
+      function buttontest(){
+        // alert("test");
+        i = i + 1;
+        $.ajax({
+          url:"caesar/caesar/",
+          type:"GET",
+          dataType: 'json',
+          data:{"value":[i]},
+          traditional:true,
+          success: function(arg){
+          },
+        });
+      }
+
       $(document).ready(function(){
         $("#button_one").click(function(){
+          // alert("test");
+          // buttonadd = buttonadd + 1;
+          // alert(buttonadd);
           $(this).attr("disabled","true");
           $("#arrow1").hide();
           $("#background1").show();
@@ -85,6 +105,7 @@
           <img src="../../static/caesar/images/background.png" id="background3" alt="" width="200" height="80">
           <img id="arrow3" src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80" style="display:none;">
           <!-- <img src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80"> -->
+
           <img src="../../static/caesar/images/Ae.png" alt="ae" width="200" height="80">
         </div>
         <div class="row">
@@ -120,5 +141,13 @@
         </div>
       </div>
     </main>
+
+    {% if image %}
+      <p>{{image}}</p>
+      <img src="../../static/caesar/images/{{image}}.png" alt="ae" width="200" height="80">
+    {% endif %}
+    <br>
+    <button id="button_test" type="button" class="btn btn-primary btn-lg" onclick="buttontest()">test</button>
+
   </body>
 </html>
