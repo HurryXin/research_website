@@ -7,3 +7,4 @@ class BrainModule(models.Model):
     module = models.PositiveSmallIntegerField(default=0)
     predict = models.NullBooleanField()
     result = models.NullBooleanField()
+    

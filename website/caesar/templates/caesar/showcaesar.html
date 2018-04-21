@@ -19,25 +19,26 @@
       // window.buttonadd = 0;
       var i = 0;
 
-      function buttontest(){
-        // alert("test");
-        i = i + 1;
-        $.ajax({
-          url:"caesar/caesar/",
-          type:"GET",
-          dataType: 'json',
-          data:{"value":[i]},
-          traditional:true,
-          success: function(arg){
-          },
-        });
-      }
+      // function buttontest(){
+      //   // alert("test");
+      //   i = i + 1;
+      //
+      //   alert(test.image);
+      //   $.ajax({
+      //     url:"caesar/caesar/",
+      //     type:"GET",
+      //     dataType: 'json',
+      //     data:{"value":[i]},
+      //     traditional:true,
+      //     success: function(arg){
+      //       test = JSON.parse('{{ image|safe }}');
+      //       alert(test)
+      //     },
+      //   });
+      // }
 
       $(document).ready(function(){
         $("#button_one").click(function(){
-          // alert("test");
-          // buttonadd = buttonadd + 1;
-          // alert(buttonadd);
           $(this).attr("disabled","true");
           $("#arrow1").hide();
           $("#background1").show();
@@ -56,6 +57,26 @@
           $("#arrow4").fadeIn("slow");
           $("#background4").hide();
           setTimeout("$('#button_one').removeAttr('disabled')",800);
+
+          i = i + 1;
+          $.ajax({
+            url:"caesar/caesar/",
+            type:"GET",
+            // dataType: 'json',
+            data:{"value":[i]},
+            traditional:true,
+            success: function(data){
+              console.log(data);
+              var test = JSON.parse(data);
+              alert(test['image1']);
+              // alert(test);
+              // alert("1");
+              // alert(test["image"]);
+            },
+            error: function(){
+              alert("error");
+            },
+          });
         });
       });
     </script>
@@ -143,8 +164,8 @@
     </main>
 
     {% if image %}
-      <p>{{image}}</p>
-      <img src="../../static/caesar/images/{{image}}.png" alt="ae" width="200" height="80">
+      <p>{{image.image}}</p>
+      <img src="../../static/caesar/images/{{image.image}}.png" alt="ae" width="200" height="80">
     {% endif %}
     <br>
     <button id="button_test" type="button" class="btn btn-primary btn-lg" onclick="buttontest()">test</button>
