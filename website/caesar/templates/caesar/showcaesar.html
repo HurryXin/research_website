@@ -19,103 +19,90 @@
       // window.buttonadd = 0;
       var i = 0;
 
-      // function buttontest(){
-      //   // alert("test");
-      //   i = i + 1;
-      //
-      //   alert(test.image);
-      //   $.ajax({
-      //     url:"caesar/caesar/",
-      //     type:"GET",
-      //     dataType: 'json',
-      //     data:{"value":[i]},
-      //     traditional:true,
-      //     success: function(arg){
-      //       test = JSON.parse('{{ image|safe }}');
-      //       alert(test)
-      //     },
-      //   });
-      // }
+      function onebyone(){
+        $('#button_one').attr("disabled","true");
+        $("#arrow1").hide();
+        $("#background1").show();
+        $("#arrow2").hide();
+        $("#background2").show();
+        $("#arrow3").hide();
+        $("#background3").show();
+        $("#arrow4").hide();
+        $("#background4").show();
+        $("#arrow1").fadeIn("slow");
+        $("#background1").hide();
+        $("#arrow2").fadeIn("slow");
+        $("#background2").hide();
+        $("#arrow3").fadeIn("slow");
+        $("#background3").hide();
+        $("#arrow4").fadeIn("slow");
+        $("#background4").hide();
+        setTimeout("$('#button_one').removeAttr('disabled')",800);
 
-      $(document).ready(function(){
-        $("#button_one").click(function(){
-          $(this).attr("disabled","true");
-          $("#arrow1").hide();
-          $("#background1").show();
-          $("#arrow2").hide();
-          $("#background2").show();
-          $("#arrow3").hide();
-          $("#background3").show();
-          $("#arrow4").hide();
-          $("#background4").show();
-          $("#arrow1").fadeIn("slow");
-          $("#background1").hide();
-          $("#arrow2").fadeIn("slow");
-          $("#background2").hide();
-          $("#arrow3").fadeIn("slow");
-          $("#background3").hide();
-          $("#arrow4").fadeIn("slow");
-          $("#background4").hide();
-          setTimeout("$('#button_one').removeAttr('disabled')",800);
-
-          i = i + 1;
-          $.ajax({
-            url:"caesar/caesar/",
-            type:"GET",
-            // dataType: 'json',
-            data:{"value":[i]},
-            traditional:true,
-            success: function(data){
-              // console.log(data);
-              var data = JSON.parse(data);
-              // alert(test['image1']);
-              if(data['module'] == "ae_sa_rr"){
-                document.getElementById('module').src="../../static/caesar/images/ae_sa_rr.png";
-              }
-              else if(data['module'] == "ae_sa"){
-                document.getElementById('module').src="../../static/caesar/images/ae_sa.png";
-              }
-              else if(data['module'] == "ae_rr"){
-                document.getElementById('module').src="../../static/caesar/images/ae_rr.png";
-              }
-              else if(data['module'] == "sa_rr"){
-                document.getElementById('module').src="../../static/caesar/images/sa_rr.png";
-              }
-              else if(data['module'] == "ae"){
-                document.getElementById('module').src="../../static/caesar/images/ae.png";
-              }
-              else if(data['module'] == "sa"){
-                document.getElementById('module').src="../../static/caesar/images/sa.png";
-              }
-              else if(data['module'] == "rr"){
-                document.getElementById('module').src="../../static/caesar/images/rr.png";
-              }
-              else{
-                alert("error");
-              }
-
-              if(data['predict'] == "correct"){
-                document.getElementById('predict').src="../../static/caesar/images/correct.png";
-              }
-              else{
-                document.getElementById('predict').src="../../static/caesar/images/fake.png";
-              }
-              title1 = data['title1'];
-              $("#title1").text(title1);
-              title2 = data['title2'];
-              $("#title2").text(title2);
-              title3 = data['title3'];
-              $("#title3").text(title3);
-              // alert(test);
-              // alert("1");
-              // alert(test["image"]);
-            },
-            error: function(){
+        i = i + 1;
+        $.ajax({
+          url:"caesar/caesar/",
+          type:"GET",
+          // dataType: 'json',
+          data:{"value":[i]},
+          traditional:true,
+          success: function(data){
+            // console.log(data);
+            var data = JSON.parse(data);
+            // alert(test['image1']);
+            if(data['module'] == "ae_sa_rr"){
+              document.getElementById('module').src="../../static/caesar/images/ae_sa_rr.png";
+            }
+            else if(data['module'] == "ae_sa"){
+              document.getElementById('module').src="../../static/caesar/images/ae_sa.png";
+            }
+            else if(data['module'] == "ae_rr"){
+              document.getElementById('module').src="../../static/caesar/images/ae_rr.png";
+            }
+            else if(data['module'] == "sa_rr"){
+              document.getElementById('module').src="../../static/caesar/images/sa_rr.png";
+            }
+            else if(data['module'] == "ae"){
+              document.getElementById('module').src="../../static/caesar/images/ae.png";
+            }
+            else if(data['module'] == "sa"){
+              document.getElementById('module').src="../../static/caesar/images/sa.png";
+            }
+            else if(data['module'] == "rr"){
+              document.getElementById('module').src="../../static/caesar/images/rr.png";
+            }
+            else{
               alert("error");
-            },
-          });
+            }
+
+            if(data['predict'] == "correct"){
+              document.getElementById('predict').src="../../static/caesar/images/correct.png";
+            }
+            else{
+              document.getElementById('predict').src="../../static/caesar/images/fake.png";
+            }
+            title1 = data['title1'];
+            $("#title1").text(title1);
+            title2 = data['title2'];
+            $("#title2").text(title2);
+            title3 = data['title3'];
+            $("#title3").text(title3);
+          },
+          error: function(){
+            alert("ajax_error");
+          },
         });
-      });
+      }
+
+      function streaming(){
+        onebyone()
+        t = setTimeout("streaming()", 1000);
+        // alert(i);
+      }
+      function stopstreaming(){
+        clearTimeout(t);
+      }
+
     </script>
   </head>
 
@@ -177,24 +164,26 @@
         </div>
         <br>
         <div class="form-inline">
-          <div style="text-align:left;font-size:35px">
+          <div style="text-align:left;font-size:30px">
             <span class="">Title1:&nbsp</span>
             <span id="title1">00</span>
-            <span>%&nbsp&nbsp&nbsp</span>
+            <span>%&nbsp</span>
 
             <span class="">Title2:&nbsp</span>
             <span id="title2">00</span>
-            <span>%&nbsp&nbsp&nbsp</span>
+            <span>%&nbsp</span>
 
             <span class="">Title3:&nbsp</span>
             <span id="title3">00</span>
-            <span>%&nbsp&nbsp&nbsp&nbsp</span>
+            <span>%&nbsp&nbsp</span>
           </div>
 
           <div style="text-align:right;">
-            <button id="button_one" type="button" class="btn btn-primary btn-lg" >one by one</button>
-            <span>&nbsp&nbsp&nbsp</span>
-            <button type="button" class="btn btn-primary btn-lg" >streaming </button>
+            <button id="button_one" type="button" class="btn btn-primary btn-lg" onclick="onebyone()">one by one</button>
+            <span>&nbsp</span>
+            <button type="button_stream" class="btn btn-primary btn-lg" onclick="streaming()">streaming </button>
+            <span>&nbsp</span>
+            <button type="button_stream" class="btn btn-primary btn-lg" onclick="stopstreaming()">stopstream </button>
           </div>
         </div>
       </div>
