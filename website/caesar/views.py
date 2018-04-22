@@ -16,6 +16,11 @@ def caesar(request):
         print value
         # print type(value)
         module = BrainModule.objects.get(id=value).module
+        predict = BrainModule.objects.get(id=value).predict
+        if not predict:
+            predict = "correct"
+        else:
+            predict = "fake"
         rr = [1]
         sa = [2]
         ae = [3]
@@ -40,7 +45,10 @@ def caesar(request):
         else:
             print "error module!"
 
-        return HttpResponse(json.dumps({"image1": 1}));
+        title1 = "100"
+        title2 = 100
+        title3 = 100
+        return HttpResponse(json.dumps({"module": image, "predict": predict, "title1": title1, "title2": title2, "title3":title3}));
     print image
     context = {"image": image}
     # context = json.dumps(context)

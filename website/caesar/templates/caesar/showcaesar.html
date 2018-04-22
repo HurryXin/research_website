@@ -66,9 +66,46 @@
             data:{"value":[i]},
             traditional:true,
             success: function(data){
-              console.log(data);
-              var test = JSON.parse(data);
-              alert(test['image1']);
+              // console.log(data);
+              var data = JSON.parse(data);
+              // alert(test['image1']);
+              if(data['module'] == "ae_sa_rr"){
+                document.getElementById('module').src="../../static/caesar/images/ae_sa_rr.png";
+              }
+              else if(data['module'] == "ae_sa"){
+                document.getElementById('module').src="../../static/caesar/images/ae_sa.png";
+              }
+              else if(data['module'] == "ae_rr"){
+                document.getElementById('module').src="../../static/caesar/images/ae_rr.png";
+              }
+              else if(data['module'] == "sa_rr"){
+                document.getElementById('module').src="../../static/caesar/images/sa_rr.png";
+              }
+              else if(data['module'] == "ae"){
+                document.getElementById('module').src="../../static/caesar/images/ae.png";
+              }
+              else if(data['module'] == "sa"){
+                document.getElementById('module').src="../../static/caesar/images/sa.png";
+              }
+              else if(data['module'] == "rr"){
+                document.getElementById('module').src="../../static/caesar/images/rr.png";
+              }
+              else{
+                alert("error");
+              }
+
+              if(data['predict'] == "correct"){
+                document.getElementById('predict').src="../../static/caesar/images/correct.png";
+              }
+              else{
+                document.getElementById('predict').src="../../static/caesar/images/fake.png";
+              }
+              title1 = data['title1'];
+              $("#title1").text(title1);
+              title2 = data['title2'];
+              $("#title2").text(title2);
+              title3 = data['title3'];
+              $("#title3").text(title3);
               // alert(test);
               // alert("1");
               // alert(test["image"]);
@@ -127,7 +164,7 @@
           <img id="arrow3" src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80" style="display:none;">
           <!-- <img src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80"> -->
 
-          <img src="../../static/caesar/images/Ae.png" alt="ae" width="200" height="80">
+          <img id="module" src="../../static/caesar/images/ae.png" alt="ae" width="200" height="80">
         </div>
         <div class="row">
           <img src="../../static/caesar/images/background.png" alt="" width="460" height="100">
@@ -136,22 +173,22 @@
         </div>
         <div class="row">
           <img src="../../static/caesar/images/background.png" alt="" width="400" height="80">
-          <img src="../../static/caesar/images/correct.png" alt="correct" width="200" height="80">
+          <img id="predict" src="../../static/caesar/images/correct.png" alt="correct" width="200" height="80">
         </div>
         <br>
         <div class="form-inline">
           <div style="text-align:left;font-size:35px">
             <span class="">Title1:&nbsp</span>
-            <span>00</span>
-            <span>%&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+            <span id="title1">00</span>
+            <span>%&nbsp&nbsp&nbsp</span>
 
             <span class="">Title2:&nbsp</span>
-            <span>00</span>
-            <span>%&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+            <span id="title2">00</span>
+            <span>%&nbsp&nbsp&nbsp</span>
 
             <span class="">Title3:&nbsp</span>
-            <span>00</span>
-            <span>%&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+            <span id="title3">00</span>
+            <span>%&nbsp&nbsp&nbsp&nbsp</span>
           </div>
 
           <div style="text-align:right;">
