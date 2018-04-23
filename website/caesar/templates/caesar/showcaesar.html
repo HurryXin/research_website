@@ -95,12 +95,14 @@
       }
 
       function streaming(){
+        $('#button_stream').attr("disabled","true");
         onebyone()
         t = setTimeout("streaming()", 1000);
         // alert(i);
       }
       function stopstreaming(){
         clearTimeout(t);
+        setTimeout("$('#button_stream').removeAttr('disabled')",800);
       }
 
     </script>
@@ -181,9 +183,9 @@
           <div style="text-align:right;">
             <button id="button_one" type="button" class="btn btn-primary btn-lg" onclick="onebyone()">one by one</button>
             <span>&nbsp</span>
-            <button type="button_stream" class="btn btn-primary btn-lg" onclick="streaming()">streaming </button>
+            <button id="button_stream" type="button" class="btn btn-primary btn-lg" onclick="streaming()">streaming </button>
             <span>&nbsp</span>
-            <button type="button_stream" class="btn btn-primary btn-lg" onclick="stopstreaming()">stopstream </button>
+            <button id="button_stream" type="button" class="btn btn-primary btn-lg" onclick="stopstreaming()">stopstream </button>
           </div>
         </div>
       </div>
