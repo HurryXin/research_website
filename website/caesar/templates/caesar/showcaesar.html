@@ -81,12 +81,14 @@
             else{
               document.getElementById('predict').src="../../static/caesar/images/fake.png";
             }
-            title1 = data['title1'];
-            $("#title1").text(title1);
-            title2 = data['title2'];
-            $("#title2").text(title2);
-            title3 = data['title3'];
-            $("#title3").text(title3);
+            recall = data['recall'];
+            $("#recall").text(recall);
+            disturb = data['disturb'];
+            $("#disturb").text(disturb);
+            precision = data['precision'];
+            $("#precision").text(precision);
+            accuracy = data['accuracy'];
+            $("#accuracy").text(accuracy);
           },
           error: function(){
             alert("ajax_error");
@@ -166,17 +168,21 @@
         </div>
         <br>
         <div class="form-inline">
-          <div style="text-align:left;font-size:30px">
-            <span class="">Title1:&nbsp</span>
-            <span id="title1">00</span>
+          <div style="text-align:left;font-size:20px">
+            <span class="">Recall:&nbsp</span>
+            <span id="recall">00</span>
             <span>%&nbsp</span>
 
-            <span class="">Title2:&nbsp</span>
-            <span id="title2">00</span>
+            <span class="">Disturb:&nbsp</span>
+            <span id="disturb">00</span>
             <span>%&nbsp</span>
 
-            <span class="">Title3:&nbsp</span>
-            <span id="title3">00</span>
+            <span class="">Precision:&nbsp</span>
+            <span id="precision">00</span>
+            <span>%&nbsp</span>
+
+            <span class="">Accuracy:&nbsp</span>
+            <span id="accuracy">00</span>
             <span>%&nbsp&nbsp</span>
           </div>
 
@@ -185,7 +191,7 @@
             <span>&nbsp</span>
             <button id="button_stream" type="button" class="btn btn-primary btn-lg" onclick="streaming()">streaming </button>
             <span>&nbsp</span>
-            <button id="button_stream" type="button" class="btn btn-primary btn-lg" onclick="stopstreaming()">stopstream </button>
+            <button id="button_stream" type="button" class="btn btn-primary btn-lg" onclick="stopstreaming()">stop</button>
           </div>
         </div>
       </div>

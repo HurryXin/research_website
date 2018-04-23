@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.template import loader
-from caesar.models import BrainModule
+from caesar.models import BrainModule, Quota
 from django.http import HttpResponse
 import json
 
@@ -45,10 +45,16 @@ def caesar(request):
         else:
             print "error module!"
 
-        title1 = "100"
-        title2 = 100
-        title3 = 100
-        return HttpResponse(json.dumps({"module": image, "predict": predict, "title1": title1, "title2": title2, "title3":title3}));
+        recall = round(Quota.objects.get(id=value).recall, 2)
+        disturb = round(Quota.objects.get(id=value).disturb, 2)
+        precision = round(Quota.objects.get(id=value).precision, 2)
+        accuracy = round(Quota.objects.get(id=value).accuracy, 2)
+
+        # print "recall:"+str(recall)+" disturb:"+str(disturb)+" precision:"+str(precision)+" accuracy:"+str(accuracy)
+        # title1 = 100
+        # title2 = 100
+        # title3 = 100
+        return HttpResponse(json.dumps({"module": image, "predict": predict, "recall": recall, "disturb": disturb, "precision":precision, "accuracy": accuracy}));
     print image
     context = {"image": image}
     # context = json.dumps(context)
