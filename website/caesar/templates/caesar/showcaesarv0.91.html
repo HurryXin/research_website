@@ -39,8 +39,7 @@ function clearAll(){
 	$("#sa").hide();
 	$("#rr").hide();
 	$("#correct").hide();
-  $("#arrow-left").hide();
-  $("#formula").hide();
+
 }
     function onebyone(){
       clearAll();
@@ -103,76 +102,13 @@ function clearAll(){
                if($("#arrow-oblique").is(":hidden")){
                    displayEffect("arrow-oblique",++j);
                }
-
             }
-            // alert(data['path']);
-            if(data['path']==0){
-              document.getElementById('formula').src="../../static/caesar/images/formula_0.png";
-            }
-            else if(data['path']==1){
-              document.getElementById('formula').src="../../static/caesar/images/formula_1.png";
-            }
-            else if(data['path']==2){
-              document.getElementById('formula').src="../../static/caesar/images/formula_2.png";
-            }
-            else if(data['path']==3){
-              document.getElementById('formula').src="../../static/caesar/images/formula_3.png";
-            }
-            else if(data['path']==4){
-              document.getElementById('formula').src="../../static/caesar/images/formula_4.png";
-            }
-            else if(data['path']==5){
-              document.getElementById('formula').src="../../static/caesar/images/formula_5.png";
-            }
-            else if(data['path']==6){
-              document.getElementById('formula').src="../../static/caesar/images/formula_6.png";
-            }
-            else if(data['path']==7){
-              document.getElementById('formula').src="../../static/caesar/images/formula_7.png";
-            }
-            else if(data['path']==8){
-              document.getElementById('formula').src="../../static/caesar/images/formula_8.png";
-            }
-            else if(data['path']==9){
-              document.getElementById('formula').src="../../static/caesar/images/formula_9.png";
-            }
-            else if(data['path']==10){
-              document.getElementById('formula').src="../../static/caesar/images/formula_10.png";
-            }
-            else if(data['path']==11){
-              document.getElementById('formula').src="../../static/caesar/images/formula_11.png";
-            }
-            else if(data['path']==12){
-              document.getElementById('formula').src="../../static/caesar/images/formula_12.png";
-            }
-            else if(data['path']==13){
-              document.getElementById('formula').src="../../static/caesar/images/formula_13.png";
-            }
-            else if(data['path']==14){
-              document.getElementById('formula').src="../../static/caesar/images/formula_14.png";
-            }
-            else if(data['path']==15){
-              document.getElementById('formula').src="../../static/caesar/images/formula_15.png";
-            }
-            else if(data['path']==16){
-              document.getElementById('formula').src="../../static/caesar/images/formula_16.png";
-            }
-            else if(data['path']==17){
-              document.getElementById('formula').src="../../static/caesar/images/formula_17.png";
-            }
-            else if(data['path']==18){
-              document.getElementById('formula').src="../../static/caesar/images/formula_18.png";
-            }
-            else{
-
-            }
-            displayEffect("arrow-left",++j);
-            displayEffect("formula",j);
+            // alert(data['predict']);
             if(data['predict'] == "correct"){
-              document.getElementById('correct').src="../../static/caesar/images/correct_test.png";
+              document.getElementById('correct').src="../../static/caesar/images/correct_1.png";
             }
             else{
-              document.getElementById('correct').src="../../static/caesar/images/fake_test.png";
+              document.getElementById('correct').src="../../static/caesar/images/fake.png";
             }
             // alert(test['image1']);
             // if(data['module'] == "ae_sa_rr"){
@@ -340,11 +276,9 @@ function clearAll(){
 	    		line-height: 200px;
 	    		text-align:center;
 	    		margin: 0 5%;
+	    		margin-left: 40%;
     		}
       #correct{
-      	border-radius: 10px;
-      }
-      #formula{
       	border-radius: 10px;
       }
     	.row-fourth{
@@ -481,13 +415,16 @@ function clearAll(){
 	  	margin: auto;
 	}
 
+
+
+
  	.button-picture ::-webkit-input-placeholder { /* WebKit browsers */
 	    color: #FFFFFF;
       font-size: 30px;
       text-align: center;
       color: #FFFFFF;
       font-family:"FangSong"
-  }
+}
 	.button-picture :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
 	    color: #FFFFFF;
       font-size: 30px;
@@ -509,6 +446,9 @@ function clearAll(){
       color: #FFFFFF;
       font-family:"FangSong"
   }
+
+
+
 
 
     </style>
@@ -590,12 +530,12 @@ function clearAll(){
 
     <!--第三行（图片行）开始-->
      <div class="row row-three">
-    	<div class="button-picture">
-    	   <img  id="formula" src="../../static/caesar/images/formula.png">
+    	<!--<div class="button-picture">
+    	   <img  id="ae" src="../../static/caesar/images/btn_ae.png">
     	</div>
     	<div class="arrow-right">
-     		<img   id="arrow-left" src="../../static/caesar/images/arrow_left_1.png" />
-    	</div>
+     		<img   id="arrow-ae" src="../../static/caesar/images/arrow_double.png" />
+    	</div>-->
     	<div class="img-header">
     			<img  id="headerImg" src="../../static/caesar/images/brain.png">
     	</div>
@@ -603,7 +543,7 @@ function clearAll(){
 	    		<img  id="arrow-oblique" src="../../static/caesar/images/arrow_d.png">
 	    </div>
     	<div class="button-picture">
-    		<img id="correct"  src="../../static/caesar/images/correct_test.png">
+    		<img id="correct"  src="../../static/caesar/images/correct_1.png">
     	</div>
     </div>
       <!--第三行（图片行）结束-->

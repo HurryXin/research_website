@@ -16,6 +16,9 @@ def caesar(request):
         print value
         # print type(value)
         module = BrainModule.objects.get(id=value).module
+        path = module
+        # print "path"
+        # print path
         predict = BrainModule.objects.get(id=value).predict
         if not predict:
             predict = "correct"
@@ -43,9 +46,10 @@ def caesar(request):
         elif module in rr:
             image = "rr"
         else:
-            print "error module!"
+            image = "percheck"
 
         recall = round(Quota.objects.get(id=value).recall, 2)
+        # print recall;
         disturb = round(Quota.objects.get(id=value).disturb, 2)
         precision = round(Quota.objects.get(id=value).precision, 2)
         accuracy = round(Quota.objects.get(id=value).accuracy, 2)
@@ -54,7 +58,8 @@ def caesar(request):
         # title1 = 100
         # title2 = 100
         # title3 = 100
-        return HttpResponse(json.dumps({"module": image, "predict": predict, "recall": recall, "disturb": disturb, "precision":precision, "accuracy": accuracy}));
+        # image = "ae_rr"
+        return HttpResponse(json.dumps({"module": image, "predict": predict, "recall": recall, "disturb": disturb, "precision":precision, "accuracy": accuracy, "path": path}));
     print image
     context = {"image": image}
     # context = json.dumps(context)

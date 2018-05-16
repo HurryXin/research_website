@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Caesar project">
+    <meta name="author" content="ruixin">
+    <link rel="icon" href="../../static/caesar/images/favicon.ico">
+    <title>Caesar</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link href="../../static/caesar/css/navbar-top-fixed.css" rel="stylesheet">
+    <link href="../../static/caesar/css/caesar.css" rel="stylesheet">
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      // window.buttonadd = 0;
+      var i = 0;
+
+      function onebyone(){
+        $('#button_one').attr("disabled","true");
+        $("#arrow1").hide();
+        $("#background1").show();
+        $("#arrow2").hide();
+        $("#background2").show();
+        $("#arrow3").hide();
+        $("#background3").show();
+        $("#arrow4").hide();
+        $("#background4").show();
+        $("#arrow1").fadeIn("slow");
+        $("#background1").hide();
+        $("#arrow2").fadeIn("slow");
+        $("#background2").hide();
+        $("#arrow3").fadeIn("slow");
+        $("#background3").hide();
+        $("#arrow4").fadeIn("slow");
+        $("#background4").hide();
+        setTimeout("$('#button_one').removeAttr('disabled')",800);
+
+        i = i + 1;
+        $.ajax({
+          url:"caesar/caesar/",
+          type:"GET",
+          // dataType: 'json',
+          data:{"value":[i]},
+          traditional:true,
+          success: function(data){
+            // console.log(data);
+            var data = JSON.parse(data);
+            // alert(test['image1']);
+            if(data['module'] == "ae_sa_rr"){
+              document.getElementById('module').src="../../static/caesar/images/ae_sa_rr.png";
+            }
+            else if(data['module'] == "ae_sa"){
+              document.getElementById('module').src="../../static/caesar/images/ae_sa.png";
+            }
+            else if(data['module'] == "ae_rr"){
+              document.getElementById('module').src="../../static/caesar/images/ae_rr.png";
+            }
+            else if(data['module'] == "sa_rr"){
+              document.getElementById('module').src="../../static/caesar/images/sa_rr.png";
+            }
+            else if(data['module'] == "ae"){
+              document.getElementById('module').src="../../static/caesar/images/ae.png";
+            }
+            else if(data['module'] == "sa"){
+              document.getElementById('module').src="../../static/caesar/images/sa.png";
+            }
+            else if(data['module'] == "rr"){
+              document.getElementById('module').src="../../static/caesar/images/rr.png";
+            }
+            else{
+              alert("error");
+            }
+
+            if(data['predict'] == "correct"){
+              document.getElementById('predict').src="../../static/caesar/images/correct.png";
+            }
+            else{
+              document.getElementById('predict').src="../../static/caesar/images/fake.png";
+            }
+            recall = data['recall'];
+            $("#recall").text(recall);
+            disturb = data['disturb'];
+            $("#disturb").text(disturb);
+            precision = data['precision'];
+            $("#precision").text(precision);
+            accuracy = data['accuracy'];
+            $("#accuracy").text(accuracy);
+          },
+          error: function(){
+            alert("ajax_error");
+          },
+        });
+      }
+
+      function streaming(){
+        $('#button_stream').attr("disabled","true");
+        onebyone()
+        t = setTimeout("streaming()", 1000);
+        // alert(i);
+      }
+      function stopstreaming(){
+        clearTimeout(t);
+        setTimeout("$('#button_stream').removeAttr('disabled')",800);
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Lab</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Publications</a>
+          </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+      <div class="jumbotron">
+        <div class="row">
+          <img src="../../static/caesar/images/input.png" alt="input" width="200" height="80">
+          <img src="../../static/caesar/images/background.png" id="background1" alt="" width="200" height="80">
+          <img id="arrow1" src="../../static/caesar/images/rightarrow.png" alt="arrow" width="200" height="80" style="display:none;">
+          <img src="../../static/caesar/images/percheck.png" alt="input" width="200" height="80">
+        </div>
+        <div class="row">
+          <img src="../../static/caesar/images/background.png" alt="" width="460" height="100">
+          <img src="../../static/caesar/images/background.png" id="background2" alt="" width="80" height="100">
+          <img id="arrow2" src="../../static/caesar/images/downarrow.png" alt="arrow" width="80" height="100" style="display:none;">
+        </div>
+        <div class="row">
+          <img src="../../static/caesar/images/background.png" alt="" width="425" height="150">
+          <img src="../../static/caesar/images/brain.png" alt="brain" width="150" height="150">
+          <img src="../../static/caesar/images/background.png" id="background3" alt="" width="200" height="80">
+          <img id="arrow3" src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80" style="display:none;">
+          <!-- <img src="../../static/caesar/images/leftrightarrow.png" alt="arrow" width="200" height="80"> -->
+
+          <img id="module" src="../../static/caesar/images/ae.png" alt="ae" width="200" height="80">
+        </div>
+        <div class="row">
+          <img src="../../static/caesar/images/background.png" alt="" width="460" height="100">
+          <img src="../../static/caesar/images/background.png" id="background4" alt="" width="80" height="100">
+          <img id="arrow4" src="../../static/caesar/images/updownarrow.png" alt="arrow" width="80" height="100" style="display:none;">
+        </div>
+        <div class="row">
+          <img src="../../static/caesar/images/background.png" alt="" width="400" height="80">
+          <img id="predict" src="../../static/caesar/images/correct.png" alt="correct" width="200" height="80">
+        </div>
+        <br>
+        <div class="form-inline">
+          <div style="text-align:left;font-size:20px">
+            <span class="">Recall:&nbsp</span>
+            <span id="recall">00</span>
+            <span>%&nbsp</span>
+
+            <span class="">Disturb:&nbsp</span>
+            <span id="disturb">00</span>
+            <span>%&nbsp</span>
+
+            <span class="">Precision:&nbsp</span>
+            <span id="precision">00</span>
+            <span>%&nbsp</span>
+
+            <span class="">Accuracy:&nbsp</span>
+            <span id="accuracy">00</span>
+            <span>%&nbsp&nbsp</span>
+          </div>
+
+          <div style="text-align:right;">
+            <button id="button_one" type="button" class="btn btn-primary btn-lg" onclick="onebyone()">one by one</button>
+            <span>&nbsp</span>
+            <button id="button_stream" type="button" class="btn btn-primary btn-lg" onclick="streaming()">streaming </button>
+            <span>&nbsp</span>
+            <button id="button_stream" type="button" class="btn btn-primary btn-lg" onclick="stopstreaming()">stop</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

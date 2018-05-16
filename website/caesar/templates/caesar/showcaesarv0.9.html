@@ -15,11 +15,9 @@
     <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
       // window.buttonadd = 0;
-    var i = 642;
+    var i = 0;
     //延迟显示的变量
     var j = 1;
-    //
-    var time = 300;
 
 
 /**
@@ -39,15 +37,11 @@ function clearAll(){
 	$("#sa").hide();
 	$("#rr").hide();
 	$("#correct").hide();
-  $("#arrow-left").hide();
-  $("#formula").hide();
+
 }
     function onebyone(){
       clearAll();
       i = i + 1;
-
-      //每次点击重新计数
-       j =1;
       $.ajax({
         url:"caesar/caesar/",
         type:"GET",
@@ -58,7 +52,7 @@ function clearAll(){
           // console.log(data);
           var data = JSON.parse(data);
           // alert(data['recall']);
-          // $("#input-text").val(data['module']);
+          $("#input-text").val(data['module']);
           recall = data['recall'];
           // alert(recall);
           $("#recall").text(recall);
@@ -69,8 +63,10 @@ function clearAll(){
           accuracy = data['accuracy'];
           $("#accuracy").text(accuracy);
 
+          //每次点击重新计数
+          j =1;
           //获取输入框的值
-          var inputVal = data['module'];//$("#input-text").val();
+          var inputVal = $("#input-text").val();
           // alert(inputVal);
           $("#arrow1").fadeIn("slow");
           displayEffect("precheck",j);
@@ -105,75 +101,6 @@ function clearAll(){
                }
 
             }
-            // alert(data['path']);
-            if(data['path']==0){
-              document.getElementById('formula').src="../../static/caesar/images/formula_0.png";
-            }
-            else if(data['path']==1){
-              document.getElementById('formula').src="../../static/caesar/images/formula_1.png";
-            }
-            else if(data['path']==2){
-              document.getElementById('formula').src="../../static/caesar/images/formula_2.png";
-            }
-            else if(data['path']==3){
-              document.getElementById('formula').src="../../static/caesar/images/formula_3.png";
-            }
-            else if(data['path']==4){
-              document.getElementById('formula').src="../../static/caesar/images/formula_4.png";
-            }
-            else if(data['path']==5){
-              document.getElementById('formula').src="../../static/caesar/images/formula_5.png";
-            }
-            else if(data['path']==6){
-              document.getElementById('formula').src="../../static/caesar/images/formula_6.png";
-            }
-            else if(data['path']==7){
-              document.getElementById('formula').src="../../static/caesar/images/formula_7.png";
-            }
-            else if(data['path']==8){
-              document.getElementById('formula').src="../../static/caesar/images/formula_8.png";
-            }
-            else if(data['path']==9){
-              document.getElementById('formula').src="../../static/caesar/images/formula_9.png";
-            }
-            else if(data['path']==10){
-              document.getElementById('formula').src="../../static/caesar/images/formula_10.png";
-            }
-            else if(data['path']==11){
-              document.getElementById('formula').src="../../static/caesar/images/formula_11.png";
-            }
-            else if(data['path']==12){
-              document.getElementById('formula').src="../../static/caesar/images/formula_12.png";
-            }
-            else if(data['path']==13){
-              document.getElementById('formula').src="../../static/caesar/images/formula_13.png";
-            }
-            else if(data['path']==14){
-              document.getElementById('formula').src="../../static/caesar/images/formula_14.png";
-            }
-            else if(data['path']==15){
-              document.getElementById('formula').src="../../static/caesar/images/formula_15.png";
-            }
-            else if(data['path']==16){
-              document.getElementById('formula').src="../../static/caesar/images/formula_16.png";
-            }
-            else if(data['path']==17){
-              document.getElementById('formula').src="../../static/caesar/images/formula_17.png";
-            }
-            else if(data['path']==18){
-              document.getElementById('formula').src="../../static/caesar/images/formula_18.png";
-            }
-            else{
-
-            }
-            displayEffect("arrow-left",++j);
-            displayEffect("formula",j);
-            if(data['predict'] == "correct"){
-              document.getElementById('correct').src="../../static/caesar/images/correct_test.png";
-            }
-            else{
-              document.getElementById('correct').src="../../static/caesar/images/fake_test.png";
-            }
             // alert(test['image1']);
             // if(data['module'] == "ae_sa_rr"){
             //   document.getElementById('be').src="../../static/caesar/images/ae_sa_rr.png";
@@ -201,7 +128,12 @@ function clearAll(){
             //   alert("error");
             // }
 
-
+            if(data['predict'] == "correct"){
+              document.getElementById('predict').src="../../static/caesar/images/correct.png";
+            }
+            else{
+              document.getElementById('predict').src="../../static/caesar/images/fake.png";
+            }
             // alert("test");
           },
           error: function(){
@@ -245,7 +177,7 @@ function clearAll(){
     function displayEffect(id ,i){
      		 setTimeout(function(){
         					$("#"+id).fadeIn("slow");
-				},j*time);
+				},j*300);
 
      }
 
@@ -280,13 +212,13 @@ function clearAll(){
     	}
     	.content{
     		width: 100%;
-    		padding:5% 10%;
+    		padding:6% 10%;
     		padding-bottom: 0px;
     	}
 
     	.info-display{
     		 width: 100%;
-    		 height: 35px;
+    		 height: 60px;
     		 line-height: 30px;
     		 padding: 0 10%;
     		 color: #FFFFFF;
@@ -341,45 +273,13 @@ function clearAll(){
 	    		text-align:center;
 	    		margin: 0 5%;
     		}
-      #correct{
-      	border-radius: 10px;
-      }
-      #formula{
-      	border-radius: 10px;
-      }
+
     	.row-fourth{
 			   height: 100px;
 		   	 width: 100%;
 		   	 text-align:center;
 		     margin: auto;
     		}
-    	.arrow-ae-img{
-				float: left;
-		  	line-height: 80px;
-		  	width: 40%;
-		  	height: 80px;
-		  	padding-left: 20%;
-		  	text-align:center;
-		  	margin:0;
-     }
-     .arrow-rr-img{
-     	float: left;
-		  	line-height: 80px;
-		  	width: 40%;
-		  	height: 80px;
-		  	padding-right: 20%;
-		  	text-align:center;
-		  	margin:0;
-     }
-
-     .arrow-sa-img{
-				float: left;
-		  	line-height: 80px;
-		  	width: 20%;
-		  	height: 80px;
-		  	text-align:center;
-		  	margin:0;
-     }
 
       .button-picture{
       	height: 75px ;
@@ -389,7 +289,7 @@ function clearAll(){
     	.input-text input{
     		outline：none;
     		border-width: 0;
-    		background-image:url(../../static/caesar/images/input_1.png) ;
+    		background-image:url(../../static/caesar/images/btn1.png) ;
     		background-repeat:no-repeat;
     	/*	background-size:cover;*/
     		width:220px;
@@ -397,13 +297,13 @@ function clearAll(){
     		padding: 20px 50px;
     		color: #FFFFFF;
     		font-size: 20px;
-    		border-radius: 10px;
     	}
 
-    	/*.row-fourth img{
+    	  .row-fourth img{
   	   height: 100%;
       	width: 15px;
-       }*/
+
+  }
 
 
   .arrow-right{
@@ -430,32 +330,7 @@ function clearAll(){
 
    }
 
-    .row-fourplus{
-    	  height:80px;
-		   	line-height: 80px;
-		   	width:100% ;
-		   	text-align:center;
-		   	margin: auto;
-    }
-    .row-fourplus-img{
-			float: left;
-	  	line-height: 80px;
-	  	width: 20%;
-	  	height: 100px;
-	  	text-align:center;
-	  	margin:0;
-    }
-
-    .row-double-fourplus-img{
-			float: left;
-	  	line-height: 80px;
-	  	width: 40%;
-	  	height: 100px;
-	  	text-align:center;
-	  	margin:0;
-    }
-
-	  .row-fifth{
+	   .row-fifth{
 		   	height:80px;
 		   	line-height: 80px;
 		   	width:100% ;
@@ -468,18 +343,21 @@ function clearAll(){
 	  	line-height: 100px;
 	  	color: #FFFFFF;
 	  	float: left;
-	  	width: 50%;
+	  	width: 40%;
 	  	height: 150px;
 
 	  }
 	.row-fifth-button{
 			float: right;
 	  	line-height: 90px;
-	  	width: 50%;
+	  	width: 40%;
 	  	height: 150px;
 	  	text-align:center;
 	  	margin: auto;
 	}
+
+
+
 
  	.button-picture ::-webkit-input-placeholder { /* WebKit browsers */
 	    color: #FFFFFF;
@@ -487,7 +365,7 @@ function clearAll(){
       text-align: center;
       color: #FFFFFF;
       font-family:"FangSong"
-  }
+}
 	.button-picture :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
 	    color: #FFFFFF;
       font-size: 30px;
@@ -509,6 +387,9 @@ function clearAll(){
       color: #FFFFFF;
       font-family:"FangSong"
   }
+
+
+
 
 
     </style>
@@ -551,27 +432,25 @@ function clearAll(){
     <div class="row row-first">
 	    	<div class="button-picture">
 	    		<span class="input-text">
-	    			<input id="input-text" type="text" name="">
+	    			<input id="input-text" type="text" name=""   placeholder="Input">
 	    		</span>
 
 	    	</div>
 	    	<div class="arrow-right">
-	    		<img  id="arrow1" src="../../static/caesar/images/arrow_r.png">
+	    		<img  id="arrow1" src="../../static/caesar/images/arrow_01.png">
 	    	</div>
 	    	<div class="button-picture">
 	    		<img  id="precheck" src="../../static/caesar/images/btn2.png">
 	    	</div>
-	      <!--<div class="arrow-right">
+	      <div class="arrow-right">
 	    		<img  id="arrow-yes" src="../../static/caesar/images/arrow_yes.png">
-	    	</div>-->
-	    	<!--<div class="button-picture">
+	    	</div>
+	    	<div class="button-picture">
 	    		<img  id="correct" src="../../static/caesar/images/btn_correct.png">
-	    	</div>-->
+	    	</div>
     </div>
    <!--   第一行结束-->
 
-
-     <!-- 第二行开始-->
      <div class="row-second">
 
      		<div class="row-second-no-content">
@@ -582,59 +461,37 @@ function clearAll(){
 		     </div>
 
 		     <div class="row-second-arrow-oblique">
-		    		<img  id="arrow-yes" src="../../static/caesar/images/arrow_test.png">
+		    		<img  id="arrow-oblique" src="../../static/caesar/images/arrow-oblique.png">
 		     </div>
      </div>
-     <!--第二行结束-->
+
 
 
     <!--第三行（图片行）开始-->
      <div class="row row-three">
     	<div class="button-picture">
-    	   <img  id="formula" src="../../static/caesar/images/formula.png">
+    	   <img  id="ae" src="../../static/caesar/images/btn_Ae.png">
     	</div>
     	<div class="arrow-right">
-     		<img   id="arrow-left" src="../../static/caesar/images/arrow_left_1.png" />
+     		<img   id="arrow-ae" src="../../static/caesar/images/arrow_double.png" />
     	</div>
     	<div class="img-header">
     			<img  id="headerImg" src="../../static/caesar/images/brain.png">
     	</div>
 	    <div class="arrow-right">
-	    		<img  id="arrow-oblique" src="../../static/caesar/images/arrow_d.png">
+	    		<img  id="arrow-sa" src="../../static/caesar/images/arrow_double.png">
 	    </div>
     	<div class="button-picture">
-    		<img id="correct"  src="../../static/caesar/images/correct_test.png">
+    		<img id="sa" class="sa-img" src="../../static/caesar/images/btn_sa.png">
     	</div>
     </div>
       <!--第三行（图片行）结束-->
 
-     <!--第四行结果箭头指向开始-->
      <div class="row-fourth">
-     	  <div class="arrow-ae-img">
-     	  	   <img id="arrow-ae" src="../../static/caesar/images/arrow_ae.png">
-     	  </div>
-     	  <div class="arrow-sa-img">
-     	  	   <img id="arrow-sa" src="../../static/caesar/images/arrow_sa.png">
-     	  </div>
-     	  <div class="arrow-rr-img">
-     	  	  <img id="arrow-rr" src="../../static/caesar/images/arrow_rr.png">
-     	  </div>
+	    		<img id="arrow-rr" src="../../static/caesar/images/arrow_double1.png">
      </div>
-     <!--第四行结果箭头指向结束-->
-    <!-- 第五行结果开始-->
-     <div class="row-fourplus">
-          <div class="row-double-fourplus-img">
-            <img  id="ae" class="ae-img" src="../../static/caesar/images/btn_ae.png">
-          </div>
-          <div class="row-fourplus-img">
-            <img  id="sa" class="sa-img" src="../../static/caesar/images/btn_sa.png">
-          </div>
-          <div class="row-double-fourplus-img">
-            <img  id="rr" class="rr-img" src="../../static/caesar/images/btn_rr.png">
-          </div>
-     </div>
-    <!--  第五行结果结束-->
-      <div class="row-fifth">
+
+      <div class="row row-fifth">
       	 <div class="row-fifth-fond">
             <span class="">Recall:&nbsp</span>
             <span id="recall">00</span>
@@ -652,9 +509,9 @@ function clearAll(){
             <span>%&nbsp&nbsp</span>
           </div>
 
-          <!--<div class="button-picture">
+          <div class="button-picture">
             <img  id="rr" class="rr-img" src="../../static/caesar/images/btn_rr.png">
-          </div>-->
+          </div>
 
 
        	 <div class="row-fifth-button">
